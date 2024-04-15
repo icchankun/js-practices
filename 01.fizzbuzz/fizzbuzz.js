@@ -13,6 +13,6 @@ const fizzbuzz = (num) => {
   }
 };
 
-Array.from(Array(DISPLAY_COUNT).keys(), (x) => x + 1).forEach((num) =>
-  fizzbuzz(num),
-);
+Array.from(Array(DISPLAY_COUNT).keys())
+  .map((x) => x + 1)
+  .forEach((num) => fizzbuzz(num));
