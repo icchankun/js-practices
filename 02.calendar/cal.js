@@ -48,3 +48,13 @@ datesInMonth.forEach((date) => {
 });
 
 console.log("");
+
+const countSaturday = () => {
+  return datesInMonth.filter((date) => {
+    return is_saturday(date);
+  }).length;
+};
+
+if (countSaturday() === 4) {
+  console.log("");
+}
