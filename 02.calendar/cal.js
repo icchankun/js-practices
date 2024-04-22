@@ -40,7 +40,7 @@ datesInMonth.forEach((date) => {
   const formattedDate = String(date.date()).padStart(2);
 
   if (isSaturday(date)) {
-    console.log(`%c${formattedDate}`, "color:#fff");
+    console.log(formattedDate);
   } else {
     process.stdout.write(formattedDate);
     process.stdout.write("".padStart(1));
