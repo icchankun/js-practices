@@ -13,23 +13,23 @@ if (options.y) {
   date = date.set("year", options.y);
 }
 
-const first_date = date.startOf("month");
-const last_date = date.endOf("month");
+const firstDate = date.startOf("month");
+const lastDate = date.endOf("month");
 
 const calHeading = `${date.month() + 1}月 ${date.year()}`;
 console.log(calHeading.padStart(13));
 console.log("日 月 火 水 木 金 土");
 
 const ADDITIONAL_INDENT = 3;
-const addCount = first_date.day();
+const addCount = firstDate.day();
 const indent = ADDITIONAL_INDENT * addCount;
 process.stdout.write("".padStart(indent));
 
-const datesInMonth = Array.from(Array(last_date.date()).keys()).map((i) =>
-  first_date.add(i, "day"),
+const datesInMonth = Array.from(Array(lastDate.date()).keys()).map((i) =>
+  firstDate.add(i, "day"),
 );
 const SATURDAY_INDEX = 6;
-const is_saturday = (date) => {
+const isSaturday = (date) => {
   if (date.day() === SATURDAY_INDEX) {
     return true;
   }
@@ -37,12 +37,12 @@ const is_saturday = (date) => {
 };
 
 datesInMonth.forEach((date) => {
-  const formatted_date = String(date.date()).padStart(2);
+  const formattedDate = String(date.date()).padStart(2);
 
-  if (is_saturday(date)) {
-    console.log(`%c${formatted_date}`, "color:#fff");
+  if (isSaturday(date)) {
+    console.log(`%c${formattedDate}`, "color:#fff");
   } else {
-    process.stdout.write(formatted_date);
+    process.stdout.write(formattedDate);
     process.stdout.write("".padStart(1));
   }
 });
@@ -51,7 +51,7 @@ console.log("");
 
 const countSaturday = () => {
   return datesInMonth.filter((date) => {
-    return is_saturday(date);
+    return isSaturday(date);
   }).length;
 };
 
