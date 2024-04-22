@@ -55,6 +55,6 @@ const countSaturday = () => {
   }).length;
 };
 
-if (countSaturday() === 4) {
+if (countSaturday() <= 4) {
   console.log("");
 }
