@@ -1,30 +1,7 @@
 import sqlite3 from "sqlite3";
 import timers from "timers/promises";
+import { asyncRun, asyncGet } from "./async_methods.js";
 const db = new sqlite3.Database(":memory:");
-
-const asyncRun = (db, sql, params = []) => {
-  return new Promise((resolve, reject) => {
-    db.run(sql, params, function (err) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(this);
-      }
-    });
-  });
-};
-
-const asyncGet = (db, sql, params = []) => {
-  return new Promise((resolve, reject) => {
-    db.get(sql, params, (err, row) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(row);
-      }
-    });
-  });
-};
 
 // エラーなしのプログラム
 asyncRun(
