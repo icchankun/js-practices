@@ -12,8 +12,8 @@ asyncRun(
   .then(() =>
     asyncRun(db, "INSERT INTO books (title) VALUES (?)", "Book Title"),
   )
-  .then((table) => {
-    console.log("id: " + table.lastID);
+  .then((statement) => {
+    console.log("id: " + statement.lastID);
     return asyncGet(db, "SELECT * FROM books");
   })
   .then((row) => {

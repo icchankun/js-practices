@@ -12,12 +12,12 @@ const db = new sqlite3.Database(":memory:");
   );
 
   try {
-    const table = await asyncRun(
+    const statement = await asyncRun(
       db,
       "INSERT INTO books (title) VALUES (?)",
       "Book Title",
     );
-    console.log("id: " + table.lastID);
+    console.log("id: " + statement.lastID);
   } catch (err) {
     console.error(err.message);
   }
@@ -43,12 +43,12 @@ await timers.setTimeout(100);
   );
 
   try {
-    const table = await asyncRun(
+    const statement = await asyncRun(
       db,
       "INSERT INTO books (author) VALUES (?)",
       "Book Author",
     );
-    console.log("id: " + table.lastID);
+    console.log("id: " + statement.lastID);
   } catch (err) {
     if (err.code === "SQLITE_ERROR") {
       console.error(err.message);
