@@ -9,9 +9,9 @@ asyncRun(
   db,
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 )
-  .then(() => {
-    return asyncRun(db, "INSERT INTO books (title) VALUES (?)", "Book Title");
-  })
+  .then(() =>
+    asyncRun(db, "INSERT INTO books (title) VALUES (?)", "Book Title"),
+  )
   .then((table) => {
     console.log("id: " + table.lastID);
     return asyncGet(db, "SELECT * FROM books");
@@ -29,9 +29,9 @@ asyncRun(
   db,
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 )
-  .then(() => {
-    return asyncRun(db, "INSERT INTO books (author) VALUES (?)", "Book Author");
-  })
+  .then(() =>
+    asyncRun(db, "INSERT INTO books (author) VALUES (?)", "Book Author"),
+  )
   .catch((err) => {
     console.error(err.message);
     return asyncGet(db, "SELECT author FROM books");
