@@ -45,6 +45,8 @@ try {
 } catch (err) {
   if (err.code === "SQLITE_ERROR") {
     console.error(err.message);
+  } else {
+    throw err;
   }
 }
 
@@ -54,6 +56,8 @@ try {
 } catch (err) {
   if (err.code === "SQLITE_ERROR") {
     console.error(err.message);
+  } else {
+    throw err;
   }
 }
 
