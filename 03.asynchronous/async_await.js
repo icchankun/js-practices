@@ -1,6 +1,7 @@
-import sqlite3 from "sqlite3";
 import timers from "timers/promises";
+import sqlite3 from "sqlite3";
 import { asyncRun, asyncGet } from "./async_methods.js";
+
 const db = new sqlite3.Database(":memory:");
 
 // エラーなしのプログラム
