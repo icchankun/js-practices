@@ -18,7 +18,7 @@ asyncRun(
   })
   .then((row) => {
     console.log(row.id + ": " + row.title);
-    asyncRun(db, "DROP TABLE books");
+    return asyncRun(db, "DROP TABLE books");
   });
 
 // エラーなしとエラーありのプログラムを正しく続けて実行させるため、0.1秒待機する。
@@ -38,5 +38,5 @@ asyncRun(
   })
   .catch((err) => {
     console.error(err.message);
-    asyncRun(db, "DROP TABLE books");
+    return asyncRun(db, "DROP TABLE books");
   });
