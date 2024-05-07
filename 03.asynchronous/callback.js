@@ -8,9 +8,9 @@ db.run(
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
   () => {
     db.run("INSERT INTO books (title) VALUES (?)", "Book Title", function () {
-      console.log("id: " + this.lastID);
+      console.log(`id: ${this.lastID}`);
       db.get("SELECT * FROM books", (_, row) => {
-        console.log(row.id + ": " + row.title);
+        console.log(`${row.id}: ${row.title}`);
         db.run("DROP TABLE books");
       });
     });

@@ -13,11 +13,11 @@ asyncRun(
     asyncRun(db, "INSERT INTO books (title) VALUES (?)", "Book Title"),
   )
   .then((statement) => {
-    console.log("id: " + statement.lastID);
+    console.log(`id: ${statement.lastID}`);
     return asyncGet(db, "SELECT * FROM books");
   })
   .then((row) => {
-    console.log(row.id + ": " + row.title);
+    console.log(`${row.id}: ${row.title}`);
     return asyncRun(db, "DROP TABLE books");
   });
 

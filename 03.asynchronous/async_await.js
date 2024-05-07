@@ -14,10 +14,10 @@ const statement = await asyncRun(
   "INSERT INTO books (title) VALUES (?)",
   "Book Title",
 );
-console.log("id: " + statement.lastID);
+console.log(`id: ${statement.lastID}`);
 
 const row = await asyncGet(db, "SELECT * FROM books");
-console.log(row.id + ": " + row.title);
+console.log(`${row.id}: ${row.title}`);
 
 await asyncRun(db, "DROP TABLE books");
 
@@ -33,7 +33,7 @@ try {
     "INSERT INTO books (author) VALUES (?)",
     "Book Author",
   );
-  console.log("id: " + statement.lastID);
+  console.log(`id: ${statement.lastID}`);
 } catch (err) {
   if (err.toString().includes("SQLITE")) {
     console.error(err.message);
@@ -44,7 +44,7 @@ try {
 
 try {
   const row = await asyncGet(db, "SELECT author FROM books");
-  console.log(row.id + ": " + row.title);
+  console.log(`${row.id}: ${row.title}`);
 } catch (err) {
   if (err.toString().includes("SQLITE")) {
     console.error(err.message);
