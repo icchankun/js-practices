@@ -9,23 +9,15 @@ await asyncRun(
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 );
 
-try {
-  const statement = await asyncRun(
-    db,
-    "INSERT INTO books (title) VALUES (?)",
-    "Book Title",
-  );
-  console.log("id: " + statement.lastID);
-} catch (err) {
-  console.error(err.message);
-}
+const statement = await asyncRun(
+  db,
+  "INSERT INTO books (title) VALUES (?)",
+  "Book Title",
+);
+console.log("id: " + statement.lastID);
 
-try {
-  const row = await asyncGet(db, "SELECT * FROM books");
-  console.log(row.id + ": " + row.title);
-} catch (err) {
-  console.error(err.message);
-}
+const row = await asyncGet(db, "SELECT * FROM books");
+console.log(row.id + ": " + row.title);
 
 await asyncRun(db, "DROP TABLE books");
 
