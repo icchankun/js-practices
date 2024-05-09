@@ -35,7 +35,7 @@ try {
   );
   console.log(`id: ${statement.lastID}`);
 } catch (err) {
-  if (err?.code === "SQLITE_ERROR") {
+  if (err instanceof Error && err.code === "SQLITE_ERROR") {
     console.error(err.message);
   } else {
     throw err;
@@ -46,7 +46,7 @@ try {
   const row = await asyncGet(db, "SELECT author FROM books");
   console.log(`${row.id}: ${row.title}`);
 } catch (err) {
-  if (err?.code === "SQLITE_ERROR") {
+  if (err instanceof Error && err.code === "SQLITE_ERROR") {
     console.error(err.message);
   } else {
     throw err;
