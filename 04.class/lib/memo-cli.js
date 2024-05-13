@@ -19,10 +19,10 @@ export default class MemoCli {
   }
   async fetchMemos() {
     this.#memos = await asyncAll(this.#db, "SELECT * FROM memos")
-    .then((rows) => rows.map((row) => new Memo(row.content, row.id)))
-    .catch((err) => {
-      throw new Error(err)
-    });
+      .then((rows) => rows.map((row) => new Memo(row.content, row.id)))
+      .catch((err) => {
+        throw new Error(err);
+      });
   }
   async exec(options) {
     if (options.l) {
@@ -36,26 +36,26 @@ export default class MemoCli {
     }
   }
   #hasNoMemos() {
-    return this.#memos.length === 0
+    return this.#memos.length === 0;
   }
   #listMemos() {
     if (this.#hasNoMemos()) {
-      console.error("表示できるメモがありません。")
+      console.error("表示できるメモがありません。");
     } else {
       this.#memos.forEach((memo) => console.log(memo.contentFirstLine()));
     }
   }
   async #referMemo() {
     try {
-      const memo = await this.#selectMemo("see")
+      const memo = await this.#selectMemo("see");
       console.log(memo.content);
     } catch {
-      console.error("参照できるメモがありません。")
+      console.error("参照できるメモがありません。");
     }
   }
   async #destroyMemo() {
     try {
-      const memo = await this.#selectMemo("delete")
+      const memo = await this.#selectMemo("delete");
       memo.destroy(this.#db);
     } catch {
       console.error("削除できるメモがありません。");
