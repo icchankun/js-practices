@@ -1,5 +1,4 @@
 import enquirer from "enquirer";
-import { asyncRun, asyncAll } from "./async-sqlite3-functions.js";
 import Memo from "./memo.js";
 
 export default class MemoCli {
@@ -9,17 +8,9 @@ export default class MemoCli {
     this.#db = db;
     this.#memos = [];
   }
-  async createTable() {
-    await asyncRun(
-      this.#db,
-      "CREATE TABLE IF NOT EXISTS memos (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL)",
-    ).catch((err) => {
-      throw new Error(err);
-    });
-  }
   async fetchMemos() {
     try {
-      const rows = await asyncAll(this.#db, "SELECT * FROM memos");
+      const rows = await this.#db.selectAll();
       this.#memos = rows.map((row) => new Memo(row.content, row.id));
     } catch (err) {
       throw new Error(err);

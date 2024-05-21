@@ -1,5 +1,3 @@
-import { asyncRun } from "./async-sqlite3-functions.js";
-
 export default class Memo {
   #id;
   constructor(content, id = "") {
@@ -9,16 +7,10 @@ export default class Memo {
   contentFirstLine() {
     return this.content.split("\n")[0];
   }
-  async create(db) {
-    await asyncRun(
-      db,
-      "INSERT INTO memos (content) VALUES (?)",
-      this.content,
-    ).catch((err) => console.error(err));
+  create(db) {
+    db.insert(this.content);
   }
-  async destroy(db) {
-    await asyncRun(db, "DELETE FROM memos WHERE id = (?)", this.#id).catch(
-      (err) => console.error(err),
-    );
+  destroy(db) {
+    db.delete(this.#id);
   }
 }
