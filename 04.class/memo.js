@@ -8,8 +8,10 @@ const options = minimist(process.argv.slice(2));
 const db = new sqlite3.Database("db.sqlite3");
 const memoCli = new MemoCli(db);
 
-await memoCli
-  .createTable()
-  .then(async () => await memoCli.fetchMemos())
-  .then(async () => await memoCli.exec(options))
-  .catch((err) => console.log(err));
+try {
+  await memoCli.createTable();
+  await memoCli.fetchMemos();
+  await memoCli.exec(options);
+} catch (err) {
+  console.log(err);
+}

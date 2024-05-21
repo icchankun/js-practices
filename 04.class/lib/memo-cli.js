@@ -18,11 +18,12 @@ export default class MemoCli {
     });
   }
   async fetchMemos() {
-    this.#memos = await asyncAll(this.#db, "SELECT * FROM memos")
-      .then((rows) => rows.map((row) => new Memo(row.content, row.id)))
-      .catch((err) => {
-        throw new Error(err);
-      });
+    try {
+      const rows = await asyncAll(this.#db, "SELECT * FROM memos");
+      this.#memos = rows.map((row) => new Memo(row.content, row.id));
+    } catch (err) {
+      throw new Error(err);
+    }
   }
   async exec(options) {
     if (options.l) {
@@ -93,9 +94,12 @@ export default class MemoCli {
     }
 
     const prompt = this.#createPrompt(promptWord);
-    return await prompt
-      .run()
-      .then(() => prompt.result())
-      .catch((err) => console.error(err));
+
+    try {
+      await prompt.run();
+      return prompt.result();
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
