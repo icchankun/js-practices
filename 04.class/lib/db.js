@@ -1,7 +1,7 @@
 import sqlite3 from "sqlite3";
 import { asyncRun, asyncAll } from "./async-sqlite3-functions.js";
 
-export default class DB {
+export default class MemoDB {
   #sqlite;
   constructor() {
     this.#sqlite = new sqlite3.Database("db.sqlite3");
