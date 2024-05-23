@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import minimist from "minimist";
-import MemoDB from "./lib/db.js";
+import MemoDB from "./lib/memo-db.js";
 import MemoCli from "./lib/memo-cli.js";
 
 const options = minimist(process.argv.slice(2));
